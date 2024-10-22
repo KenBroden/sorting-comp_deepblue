@@ -52,7 +52,7 @@ public class DataGenerator {
 			
 			List<Integer> list = new ArrayList<>();
 
-			for(int j = 1; j <= m; ++j) { //Create numbers to permutae
+			for(int j = 1; j <= m; ++j) { //Create numbers to permute
 			    list.add(j);
 			}
 			
