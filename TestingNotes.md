@@ -52,10 +52,17 @@ Testing with single core(```taskset -c 0 java Group<> <input>.txt <output>.txt``
 
 - Array size: 100,000
 - Time: 179 ms
-- Time per array: 0.00179 ms
-
-\
+- Time per array: 0.00179 ms/array
 
 - Array size: 100,000(already sorted)
 - Time: 33 ms
-- Time per array: 0.00033 ms
+- Time per array: 0.00033 ms/array
+
+- Array size: 500,000
+- Time: 504 ms
+- Time per array: 0.001008 ms/array
+
+- Array size: 500,000(already sorted)
+- Time: 129 ms
+- Time per array: 0.000258 ms/array
+  
