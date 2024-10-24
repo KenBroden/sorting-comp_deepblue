@@ -43,6 +43,15 @@ private static void merge(int [][] toSort, int [][] left, int [][] right) {
     }
 }
 ```
-Data Generation: ```java DataGenerator <input>.txt 1000000 0.002```
-Testing with single core(```console taskset -c 0 java Group<> <input>.txt <output>.txt```)
+
 **Results:**
+
+Data Generation: ```java DataGenerator <input>.txt 1000000 0.002```
+
+Testing with single core(```console taskset -c 0 java Group<> <input>.txt <output>.txt```)
+
+Array size: 100,000
+Time: 179 ms
+
+Array size: 100,000(already sorted)
+Time: 33 ms
