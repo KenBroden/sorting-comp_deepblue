@@ -11,8 +11,11 @@ import java.util.Scanner;
 // To avoid file reading/writing connections to the server, run in /tmp 
 // of your lab machine.
 
+// Change where Insertion sort is used in the mergeSort method???
+
 public class GroupDeepBlue {
 
+	private static final int INSERTION_SORT_THRESHOLD = 10;
 	public static void main(String[] args) throws InterruptedException, FileNotFoundException {
 
 		if (args.length < 2) {
@@ -70,46 +73,103 @@ public class GroupDeepBlue {
 	// Note: you may change the return type of the method.
 	// You would need to provide your own function that prints your sorted array to
 	// a file in the exact same format that my program outputs
-	private static void sort(int [][] toSort) {
-		Arrays.sort(toSort, new SortingCompetitionComparator());
-		// Base case
-		if (toSort.length <= 1) {
+
+	// ORIGINAL SORT METHOD
+	// private static void sort(int [][] toSort) {
+	// 	Arrays.sort(toSort, new SortingCompetitionComparator());
+	// 	// Base case
+	// 	if (toSort.length <= 1) {
+	// 		return;
+	// 	}
+
+	// 	// Split the array into two halves
+	// 	int mid = toSort.length / 2;
+	// 	int [][] left = Arrays.copyOfRange(toSort, 0, mid);
+	// 	int [][] right = Arrays.copyOfRange(toSort, mid, toSort.length);
+
+	// 	// Recursively sort the two halves
+	// 	sort(left);
+	// 	sort(right);
+
+	// 	// Merge the two halves
+	// 	merge(toSort, left, right);
+	// }
+
+	// MERGE SORT METHOD 2.0
+	// This mergeSort method uses insertion sort for small sub-arrays. Can 
+	// we change where insertion is used in the mergeSort method?
+	private static void mergeSort(int[][] toSort, int left, int right) {
+		if (right - left <= INSERTION_SORT_THRESHOLD) {
+			insertionSort(toSort, left, right);
 			return;
 		}
 
-		// Split the array into two halves
-		int mid = toSort.length / 2;
-		int [][] left = Arrays.copyOfRange(toSort, 0, mid);
-		int [][] right = Arrays.copyOfRange(toSort, mid, toSort.length);
-
-		// Recursively sort the two halves
-		sort(left);
-		sort(right);
-
-		// Merge the two halves
-		merge(toSort, left, right);
+		if(left < right) {
+			int mid = (left + right) / 2;
+			mergeSort(toSort, left, mid);
+			mergeSort(toSort, mid + 1, right);
+			merge(toSort, left, mid, right);
+		}
 	}
 
-	// compare() and merge the two halves
-	private static void merge(int [][] toSort, int [][] left, int [][] right) {
-		int i = 0, j = 0, k = 0;
-		while (i < left.length && j < right.length) {
-			if (new SortingCompetitionComparator().compare(left[i], right[j]) < 0) {
-				toSort[k++] = left[i++];
+	// ORIGINAL MERGE METHOD
+	// private static void merge(int [][] toSort, int [][] left, int [][] right) {
+	// 	int i = 0, j = 0, k = 0;
+	// 	while (i < left.length && j < right.length) {
+	// 		if (new SortingCompetitionComparator().compare(left[i], right[j]) < 0) {
+	// 			toSort[k++] = left[i++];
+	// 		} else {
+	// 			toSort[k++] = right[j++];
+	// 		}
+	// 	}
+	// 	while (i < left.length) {
+	// 		toSort[k++] = left[i++];
+	// 	}
+	// 	while (j < right.length) {
+	// 		toSort[k++] = right[j++];
+	// 	}
+	// }
+
+	// INSERTION SORT METHOD 2.0
+	private static void insertionSort(int[][] toSort, int left, int right) {
+		for (int i = left + 1; i <= right; i++) {
+			int[] key = toSort[i];
+			int j = i - 1;
+
+			while (j >= left && new SortingCompetitionComparator().compare(toSort[j], key) > 0) {
+				toSort[j + 1] = toSort[j];
+				j--;
+			}
+
+			toSort[j + 1] = key;
+		}
+	}
+
+	// MERGE METHOD 2.0
+	private static void merge(int [][] toSort, int left, int mid, int right) {
+		int[][] leftArray = new int[mid - left + 1][];
+		int[][] rightArray = new int[right - mid][];
+
+		System.arraycopy(toSort, left, leftArray, 0, leftArray.length);
+		System.arraycopy(toSort, mid + 1, rightArray, 0, rightArray.length);
+
+		int i = 0, j = 0, k = left;
+		while (i < leftArray.length && j < rightArray.length) {
+			if (new SortingCompetitionComparator().compare(leftArray[i], rightArray[j]) <=  0) {
+				toSort[k++] = leftArray[i++];
 			} else {
-				toSort[k++] = right[j++];
+				toSort[k++] = rightArray[j++];
 			}
 		}
-		while (i < left.length) {
-			toSort[k++] = left[i++];
+		while (i < leftArray.length) {
+			toSort[k++] = leftArray[i++];
 		}
-		while (j < right.length) {
-			toSort[k++] = right[j++];
+		while (j < rightArray.length) {
+			toSort[k++] = rightArray[j++];
 		}
 	}
 
 	private static class SortingCompetitionComparator implements Comparator<int []> {
-		
 		@Override
 		public int compare(int [] seq1, int [] seq2) {
 			// looking for different elements in the same positions
@@ -140,8 +200,6 @@ public class GroupDeepBlue {
 			// return the negated difference of odds 
 			return (seq2.length - seq2_evens) - (seq1.length - seq1_evens);
 		}
-
-
 
 		public static void runComparatorTests() {
 			int [] arr1 = {1, 3, 2};
@@ -200,6 +258,11 @@ public class GroupDeepBlue {
 		
 
 	}
+
+	// SORT METHOD 2.0
+	private static void sort(int [][] toSort) {
+		mergeSort(toSort, 0, toSort.length - 1);
+	}
 	
 	private static void writeOutResult(int [][] sorted, String outputFilename) throws FileNotFoundException {
 		PrintWriter out = new PrintWriter(outputFilename);
@@ -211,6 +274,5 @@ public class GroupDeepBlue {
 		}
 		out.close();
 	}
-	
 	
 }
