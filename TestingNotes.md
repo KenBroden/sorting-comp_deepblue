@@ -68,7 +68,7 @@ Testing with single core(```taskset -c 0 java Group<> <input>.txt <output>.txt``
   
 ## Algo Version 2
 
-Still using merge sort, but now insertion sort kicks in when the array drops to sime size we define
+Still using merge sort, but now insertion sort kicks in when the array drops to some size we define, called the INSERTION_SORT_THRESHOLD
 
 ```java
 private static void sort(int [][] toSort) {
@@ -175,6 +175,8 @@ INSERTION_SORT_THRESHOLD: 20 (This is when insertion sort jumps in)
 - Array size: 100,000
 - Time: 60 ms
 - Time per array: 0.0006 ms/array
+
+---------------------------------------
 
 - Array size: 100,000(already sorted)
 - Time: 7 ms
