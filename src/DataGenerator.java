@@ -14,6 +14,8 @@ import java.util.List;
 
 public class DataGenerator {
 	private static int seed = 4242; // change the seed to get different data
+	
+	@SuppressWarnings("unused")
 	private static Random r = new Random(seed);
 
         public static String arrayToString(List<Integer> arr) { //Borrowed from https://www.geeksforgeeks.org/convert-array-of-integers-to-comma-separated-string/#
