@@ -151,3 +151,39 @@ INSERTION_SORT_THRESHOLD: 10 (This is when insertion sort jumps in)
 - Array size: 500,000(already sorted)
 - Time: 35 ms
 - Time per array: 0.00007 ms/array
+
+INSERTION_SORT_THRESHOLD: 5 (This is when insertion sort jumps in)
+
+- Array size: 100,000
+- Time: 85 ms
+- Time per array: 0.00085 ms/array
+
+- Array size: 100,000(already sorted)
+- Time: 8 ms
+- Time per array: 0.00008 ms/array
+
+- Array size: 500,000
+- Time: 231 ms
+- Time per array: 0.000462 ms/array
+
+- Array size: 500,000(already sorted)
+- Time: 72 ms
+- Time per array: 0.000144 ms/array
+
+INSERTION_SORT_THRESHOLD: 20 (This is when insertion sort jumps in)
+
+- Array size: 100,000
+- Time: 60 ms
+- Time per array: 0.0006 ms/array
+
+- Array size: 100,000(already sorted)
+- Time: 7 ms
+- Time per array: 0.00007 ms/array
+
+- Array size: 500,000
+- Time: 237 ms
+- Time per array: 0.000474 ms/array
+
+- Array size: 500,000(already sorted)
+- Time: 63 ms
+- Time per array: 0.000126 ms/array
