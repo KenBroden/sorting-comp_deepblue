@@ -50,21 +50,12 @@ Data Generation: ```java DataGenerator <input>.txt 1000000 0.002```
 
 Testing with single core(```taskset -c 0 java Group<> <input>.txt <output>.txt```)
 
-- Array size: 100,000
-- Time: 179 ms
-- Time per array: 0.00179 ms/array
-
-- Array size: 100,000(already sorted)
-- Time: 33 ms
-- Time per array: 0.00033 ms/array
-
-- Array size: 500,000
-- Time: 504 ms
-- Time per array: 0.001008 ms/array
-
-- Array size: 500,000(already sorted)
-- Time: 129 ms
-- Time per array: 0.000258 ms/array
+| Array Size       | Time to sort  | Time per array     |
+| ---------------- | ------------- | ------------------ |
+| 100,000          | 179 ms        | 0.00179 ms/array   |
+| 100,000(sorted)  | 33 ms         | 0.00033 ms/array   |
+| 500,000          | 504 ms        | 0.001008 ms/array  |
+| 500,000(sorted)  | 129 ms        | 0.000258 ms/array  |
   
 ## Algo Version 2
 
@@ -136,48 +127,23 @@ Testing with single core(```taskset -c 0 java Group<> <input>.txt <output>.txt``
 
 INSERTION_SORT_THRESHOLD: 10 (This is when insertion sort jumps in)
 
-- Array size: 100,000
-- Time: 34 ms
-- Time per array: 0.00034 ms/array
-
-- Array size: 100,000(already sorted)
-- Time: 6 ms
-- Time per array: 0.00006 ms/array
-
-- Array size: 500,000
-- Time: 141 ms
-- Time per array: 0.000282 ms/array
-
-- Array size: 500,000(already sorted)
-- Time: 35 ms
-- Time per array: 0.00007 ms/array
-
-| Array Size      | Time to sort | Time per array    |
-| --------------- | ------------ | ----------------- |
-| 100,000         | 34 ms        | 0.00034 ms/array  |
-| 100,000(sorted) | 6 ms         | 0.00006 ms/array  |
-| 500,000         | 141 ms       | 0.000282 ms/array |
-| 500,000(sorted) | 35 ms        | 0.00007 ms/array  |
+| Array Size       | Time to sort  | Time per array     |
+| ---------------- | ------------- | ------------------ |
+| 100,000          | 34 ms         | 0.00034 ms/array   |
+| 100,000(sorted)  | 6 ms          | 0.00006 ms/array   |
+| 500,000          | 141 ms        | 0.000282 ms/array  |
+| 500,000(sorted)  | 35 ms         | 0.00007 ms/array   |
 
 ---------------------------------------
 
 INSERTION_SORT_THRESHOLD: 5 (This is when insertion sort jumps in)
 
-- Array size: 100,000
-- Time: 85 ms
-- Time per array: 0.00085 ms/array
-
-- Array size: 100,000(already sorted)
-- Time: 8 ms
-- Time per array: 0.00008 ms/array
-
-- Array size: 500,000
-- Time: 231 ms
-- Time per array: 0.000462 ms/array
-
-- Array size: 500,000(already sorted)
-- Time: 72 ms
-- Time per array: 0.000144 ms/array
+| Array Size       | Time to sort  | Time per array     |
+| ---------------- | ------------- | ------------------ |
+| 100,000          | 85 ms         | 0.00085 ms/array   |
+| 100,000(sorted)  | 8 ms          | 0.00008 ms/array   |
+| 500,000          | 231 ms        | 0.000462 ms/array  |
+| 500,000(sorted)  | 72 ms         | 0.000144 ms/array   |
 
 ---------------------------------------
 
@@ -198,3 +164,10 @@ INSERTION_SORT_THRESHOLD: 20 (This is when insertion sort jumps in)
 - Array size: 500,000(already sorted)
 - Time: 63 ms
 - Time per array: 0.000126 ms/array
+
+| Array Size       | Time to sort  | Time per array     |
+| ---------------- | ------------- | ------------------ |
+| 100,000          | 60 ms         | 0.0006 ms/array   |
+| 100,000(sorted)  | 7 ms          | 0.00007 ms/array   |
+| 500,000          | 237 ms        | 0.000474 ms/array  |
+| 500,000(sorted)  | 63 ms         | 0.000126 ms/array   |
