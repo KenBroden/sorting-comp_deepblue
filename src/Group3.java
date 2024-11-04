@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 // Change where Insertion sort is used in the mergeSort method???
 
-public class GroupDeepBlue {
+public class Group3 {
 
 	private static final int INSERTION_SORT_THRESHOLD = 10;
 
