@@ -161,12 +161,12 @@ INSERTION_SORT_THRESHOLD: 20 (This is when insertion sort jumps in)
 Uses a single auxiliary array that is passed through the recursive calls of mergeSort and used in the merge method, as opposed to leftArray and rightArray.
 
 ```java
-// SORT METHOD 2.0
+// SORT METHOD 3.0
 private static void sort(int[][] toSort) {
     mergeSort(toSort, 0, toSort.length - 1, new int[toSort.length][]);
 }
 
-// MERGE SORT METHOD 2.0
+// MERGE SORT METHOD 3.0
 private static void mergeSort(int[][] toSort, int left, int right, int[][] aux) {
     if (right - left <= INSERTION_SORT_THRESHOLD) {
         insertionSort(toSort, left, right);
@@ -181,7 +181,7 @@ private static void mergeSort(int[][] toSort, int left, int right, int[][] aux) 
     }
 }
 
-// MERGE METHOD 2.0
+// MERGE METHOD 3.0
 private static void merge(int[][] toSort, int left, int mid, int right, int[][] aux) {
     System.arraycopy(toSort, left, aux, left, right - left + 1);
 
@@ -201,7 +201,7 @@ private static void merge(int[][] toSort, int left, int mid, int right, int[][] 
     }
 }
 
-// INSERTION SORT METHOD 2.0
+// INSERTION SORT METHOD 3.0
 private static void insertionSort(int[][] toSort, int left, int right) {
     for (int i = left + 1; i <= right; i++) {
         int[] key = toSort[i];
