@@ -155,3 +155,84 @@ INSERTION_SORT_THRESHOLD: 20 (This is when insertion sort jumps in)
 | 100,000(sorted)  | 7 ms          | 0.00007 ms/array   |
 | 500,000          | 237 ms        | 0.000474 ms/array  |
 | 500,000(sorted)  | 63 ms         | 0.000126 ms/array   |
+
+## Algo Version 3
+
+Uses a single auxiliary array that is passed through the recursive calls of mergeSort and used in the merge method, as opposed to leftArray and rightArray.
+
+```java
+// SORT METHOD 2.0
+private static void sort(int[][] toSort) {
+    mergeSort(toSort, 0, toSort.length - 1, new int[toSort.length][]);
+}
+
+// MERGE SORT METHOD 2.0
+private static void mergeSort(int[][] toSort, int left, int right, int[][] aux) {
+    if (right - left <= INSERTION_SORT_THRESHOLD) {
+        insertionSort(toSort, left, right);
+        return;
+    }
+
+    if (left < right) {
+        int mid = (left + right) / 2;
+        mergeSort(toSort, left, mid, aux);
+        mergeSort(toSort, mid + 1, right, aux);
+        merge(toSort, left, mid, right, aux);
+    }
+}
+
+// MERGE METHOD 2.0
+private static void merge(int[][] toSort, int left, int mid, int right, int[][] aux) {
+    System.arraycopy(toSort, left, aux, left, right - left + 1);
+
+    int i = left, j = mid + 1, k = left;
+    while (i <= mid && j <= right) {
+        if (new SortingCompetitionComparator().compare(aux[i], aux[j]) <= 0) {
+            toSort[k++] = aux[i++];
+        } else {
+            toSort[k++] = aux[j++];
+        }
+    }
+    while (i <= mid) {
+        toSort[k++] = aux[i++];
+    }
+    while (j <= right) {
+        toSort[k++] = aux[j++];
+    }
+}
+
+// INSERTION SORT METHOD 2.0
+private static void insertionSort(int[][] toSort, int left, int right) {
+    for (int i = left + 1; i <= right; i++) {
+        int[] key = toSort[i];
+        int j = i - 1;
+
+        while (j >= left && new SortingCompetitionComparator().compare(toSort[j], key) > 0) {
+            toSort[j + 1] = toSort[j];
+            j--;
+        }
+
+        toSort[j + 1] = key;
+    }
+}
+
+```
+
+**Results:**
+
+Data Generation: ```java DataGenerator <input>.txt 500000 0.002```
+
+Testing with single core(```taskset -c 0 java Group<> <input>.txt <output>.txt```)
+
+INSERTION_SORT_THRESHOLD: 10 (This is when insertion sort jumps in)
+
+| Array Size       | Time to sort  | Time per array     |
+| ---------------- | ------------- | ------------------ |
+| 100,000          | 75 ms         | 0.00075 ms/array   |
+| 100,000(sorted)  | 7 ms          | 0.00007 ms/array   |
+| 500,000          | 127 ms        | 0.000254 ms/array  |
+| 500,000(sorted)  | 41 ms         | 0.00008 ms/array   |
+| 700,000          | 196 ms        | 0.000280 ms/array  |
+| 700,000(sorted)  | 58 ms         | 0.00008 ms/array   |
+
+---------------------------------------
